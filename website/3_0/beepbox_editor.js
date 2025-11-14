@@ -84,13 +84,6 @@ var beepbox = (function (exports) {
         { name: "double pulse", volume: 0.4, samples: centerWave([1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, -1.0, 1.0, 1.0, 1.0, 1.0, -1.0, -1.0, -1.0, -1.0]) },
         { name: "spiky", volume: 0.4, samples: centerWave([1.0, -1.0, 1.0, -1.0, 1.0, 0.0]) },
     ]);
-    Config.chipNoises = toNameMap([
-        { name: "retro", volume: 0.25, basePitch: 69, pitchFilterMult: 1024.0, isSoft: false, samples: null },
-        { name: "white", volume: 1.0, basePitch: 69, pitchFilterMult: 8.0, isSoft: true, samples: null },
-        { name: "clang", volume: 0.4, basePitch: 69, pitchFilterMult: 1024.0, isSoft: false, samples: null },
-        { name: "buzz", volume: 0.3, basePitch: 69, pitchFilterMult: 1024.0, isSoft: false, samples: null },
-        { name: "hollow", volume: 1.5, basePitch: 96, pitchFilterMult: 1.0, isSoft: true, samples: null },
-    ]);
     Config.filterCutoffMaxHz = 8000;
     Config.filterCutoffMinHz = 1;
     Config.filterMax = 0.95;
@@ -113,6 +106,7 @@ var beepbox = (function (exports) {
         { name: "delayed", amplitude: 0.3, periodsSeconds: [0.14], delayParts: 18 },
         { name: "heavy", amplitude: 0.45, periodsSeconds: [0.14], delayParts: 0 },
         { name: "shaky", amplitude: 0.1, periodsSeconds: [0.11, 1.618 * 0.11, 3 * 0.11], delayParts: 0 },
+	    { name: "insane", amplitude: 5, periodsSeconds: [0.11, 1.618 * 0.11, 3 * 4], delayParts: 0 },
     ]);
     Config.intervals = toNameMap([
         { name: "union", spread: 0.0, offset: 0.0, volume: 0.7, sign: 1.0 },
@@ -124,6 +118,8 @@ var beepbox = (function (exports) {
         { name: "octave", spread: 6.0, offset: 6.0, volume: 0.8, sign: 1.0 },
         { name: "bowed", spread: 0.02, offset: 0.0, volume: 1.0, sign: -1.0 },
         { name: "piano", spread: 0.01, offset: 0.0, volume: 1.0, sign: 0.7 },
+	    { name: "insane", spread: 10, offset: 10, volume: 1.0, sign: 2 },
+	    { name: "very insane", spread: 13, offset: -2.5, volume: 1.0, sign: -3 },
     ]);
     Config.effectsNames = ["none", "reverb", "chorus", "chorus & reverb"];
     Config.volumeRange = 8;
@@ -134,7 +130,7 @@ var beepbox = (function (exports) {
         { name: "harmony", harmonizes: true, customInterval: false, arpeggiates: false, isCustomInterval: false, strumParts: 0 },
         { name: "strum", harmonizes: true, customInterval: false, arpeggiates: false, isCustomInterval: false, strumParts: 1 },
         { name: "arpeggio", harmonizes: false, customInterval: false, arpeggiates: true, isCustomInterval: false, strumParts: 0 },
-        { name: "custom interval", harmonizes: true, customInterval: true, arpeggiates: true, isCustomInterval: true, strumParts: 0 },
+        { name: "custom", harmonizes: true, customInterval: true, arpeggiates: true, isCustomInterval: true, strumParts: 0 },
     ]);
     Config.maxChordSize = 4;
     Config.operatorCount = 4;
@@ -401,7 +397,6 @@ var beepbox = (function (exports) {
         { name: "Custom Instruments", presets: toNameMap([
                 { name: "chip wave", customType: 0 },
                 { name: "FM (expert)", customType: 1 },
-                { name: "basic noise", customType: 2 },
                 { name: "spectrum", customType: 3 },
                 { name: "drumset", customType: 4 },
                 { name: "harmonics", customType: 5 },
@@ -413,7 +408,6 @@ var beepbox = (function (exports) {
                 { name: "square lead", midiProgram: 80, generalMidi: true, settings: { "type": "chip", "transition": "hard", "effects": "reverb", "chord": "harmony", "filterCutoffHz": 2828, "filterResonance": 14, "filterEnvelope": "steady", "wave": "square", "interval": "hum", "vibrato": "none" } },
                 { name: "sawtooth lead 1", midiProgram: 81, generalMidi: true, settings: { "type": "chip", "transition": "hard", "effects": "reverb", "chord": "harmony", "filterCutoffHz": 2828, "filterResonance": 14, "filterEnvelope": "steady", "wave": "sawtooth", "interval": "shimmer", "vibrato": "none" } },
                 { name: "sawtooth lead 2", midiProgram: 81, settings: { "type": "chip", "effects": "reverb", "transition": "medium fade", "chord": "harmony", "filterCutoffHz": 5657, "filterResonance": 29, "filterEnvelope": "steady", "wave": "sawtooth", "interval": "hum", "vibrato": "light" } },
-                { name: "chip noise", midiProgram: 116, isNoise: true, settings: { "type": "noise", "transition": "hard", "effects": "none", "chord": "arpeggio", "filterCutoffHz": 4000, "filterResonance": 0, "filterEnvelope": "steady", "wave": "retro" } },
                 { name: "FM twang", midiProgram: 32, settings: { "type": "FM", "transition": "hard", "effects": "none", "chord": "harmony", "filterCutoffHz": 8000, "filterResonance": 0, "filterEnvelope": "steady", "vibrato": "none", "algorithm": "1←(2 3 4)", "feedbackType": "1⟲", "feedbackAmplitude": 0, "feedbackEnvelope": "steady", "operators": [{ "frequency": "1×", "amplitude": 15, "envelope": "custom" }, { "frequency": "1×", "amplitude": 15, "envelope": "twang 2" }, { "frequency": "1×", "amplitude": 0, "envelope": "steady" }, { "frequency": "1×", "amplitude": 0, "envelope": "steady" }] } },
                 { name: "FM bass", midiProgram: 36, settings: { "type": "FM", "effects": "reverb", "transition": "hard", "chord": "custom interval", "filterCutoffHz": 8000, "filterResonance": 0, "filterEnvelope": "steady", "vibrato": "none", "algorithm": "1←(2 3←4)", "feedbackType": "1⟲", "feedbackAmplitude": 0, "feedbackEnvelope": "steady", "operators": [{ "frequency": "2×", "amplitude": 11, "envelope": "custom" }, { "frequency": "1×", "amplitude": 7, "envelope": "twang 2" }, { "frequency": "1×", "amplitude": 9, "envelope": "twang 3" }, { "frequency": "20×", "amplitude": 3, "envelope": "twang 2" }] } },
                 { name: "FM flute", midiProgram: 73, settings: { "type": "FM", "effects": "reverb", "transition": "soft", "chord": "harmony", "filterCutoffHz": 8000, "filterResonance": 0, "filterEnvelope": "steady", "vibrato": "none", "algorithm": "1←(2 3 4)", "feedbackType": "1⟲", "feedbackAmplitude": 0, "feedbackEnvelope": "steady", "operators": [{ "frequency": "1×", "amplitude": 15, "envelope": "custom" }, { "frequency": "1×", "amplitude": 6, "envelope": "twang 2" }, { "frequency": "1×", "amplitude": 0, "envelope": "steady" }, { "frequency": "1×", "amplitude": 0, "envelope": "steady" }] } },
@@ -606,7 +600,6 @@ var beepbox = (function (exports) {
                 { name: "buzz saw", midiProgram: 30, settings: { "type": "FM", "effects": "reverb", "transition": "soft", "chord": "custom interval", "filterCutoffHz": 2000, "filterResonance": 0, "filterEnvelope": "steady", "vibrato": "none", "algorithm": "1←2←3←4", "feedbackType": "1⟲", "feedbackAmplitude": 0, "feedbackEnvelope": "steady", "operators": [{ "frequency": "5×", "amplitude": 13, "envelope": "custom" }, { "frequency": "1×", "amplitude": 10, "envelope": "steady" }, { "frequency": "~1×", "amplitude": 6, "envelope": "steady" }, { "frequency": "11×", "amplitude": 12, "envelope": "steady" }] } },
                 { name: "mosquito", midiProgram: 93, settings: { "type": "PWM", "effects": "reverb", "transition": "cross fade", "chord": "harmony", "filterCutoffHz": 2828, "filterResonance": 57, "filterEnvelope": "steady", "pulseWidth": 4.40625, "pulseEnvelope": "tremolo6", "vibrato": "shaky" } },
                 { name: "breathing", midiProgram: 126, isNoise: true, midiSubharmonicOctaves: -1, settings: { "type": "spectrum", "effects": "reverb", "transition": "hard fade", "chord": "harmony", "filterCutoffHz": 2000, "filterResonance": 14, "filterEnvelope": "swell 2", "spectrum": [14, 14, 14, 29, 29, 29, 29, 29, 43, 29, 29, 43, 43, 43, 29, 29, 71, 43, 86, 86, 57, 100, 86, 86, 86, 86, 71, 86, 71, 57] } },
-                { name: "klaxon synth", midiProgram: 125, isNoise: true, midiSubharmonicOctaves: -1, settings: { "type": "noise", "effects": "reverb", "transition": "slide", "chord": "harmony", "filterCutoffHz": 2000, "filterResonance": 86, "filterEnvelope": "steady", "wave": "buzz" } },
                 { name: "theremin", midiProgram: 40, settings: { "type": "harmonics", "effects": "reverb", "transition": "slide", "chord": "harmony", "filterCutoffHz": 4000, "filterResonance": 14, "filterEnvelope": "steady", "interval": "union", "vibrato": "heavy", "harmonics": [100, 71, 57, 43, 29, 29, 14, 14, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] } },
                 { name: "sonar ping", midiProgram: 121, settings: { "type": "spectrum", "effects": "reverb", "transition": "medium fade", "chord": "harmony", "filterCutoffHz": 1414, "filterResonance": 14, "filterEnvelope": "twang 2", "spectrum": [100, 43, 29, 29, 14, 14, 14, 14, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] } },
             ]) },
