@@ -1,10 +1,9 @@
-# BeepBox
-
-BeepBox is a music synthesizer, along with an online editor for authoring songs that you can try out at [beepbox.co](https://www.beepbox.co)!
+# Chickenbox
+ChickenBox is a music synthesizer, along with an online editor for authoring songs that you can try out at [synthbox.co](https://www.synthbox.co)!
 
 The editor stores all song data in the URL as text after the hash mark, and this song data can be easily copied and shared. You can use the code in this npm package to synthesize music out loud from this song data, just like in the editor!
 
-BeepBox is a passion project, and will always be free to use. If you find it valuable and have the means, any gratuity via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=QZJTX9GRYEV9N&currency_code=USD) would be appreciated! BeepBox is developed by [John Nesky](https://johnnesky.com/), and this code is available under the [MIT license](https://github.com/johnnesky/beepbox/blob/main/LICENSE.md).
+Chickenbox is a passion project, and will always be free to use. If you find it valuable and have the means, any gratuity via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=QZJTX9GRYEV9N&currency_code=USD) would be appreciated! Chickenbox is developed by [Leonperalta1005](https://johnnesky.com/), and this code is available under the [MIT license](https://github.com/leonperalta1005/chickenbox/blob/main/LICENSE.md).
 
 ## Getting the synthesizer without installing anything
 
