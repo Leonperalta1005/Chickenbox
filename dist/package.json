@@ -1,16 +1,16 @@
 {
-	"name": "beepbox",
-	"version": "4.2.1",
+	"name": "chickenbox",
+	"version": "1",
 	"author": "John Nesky",
-	"homepage": "https://www.beepbox.co",
-	"description": "BeepBox is an online tool for sketching and sharing instrumental music.",
+	"homepage": "https://www.leonperalta1005.github.io/chickenbox/website",
+	"description": "Chcikenbox is an first mod but deteled the basic noise,chip noise and klaxon synth.",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/johnnesky/beepbox.git"
+		"url": "git+https://github.com/leonperalta1005/chickenbox.git"
 	},
 	"bugs": {
-		"url": "https://github.com/johnnesky/beepbox/issues"
+		"url": "https://github.com/leonperalta1005/chickenbox/issues"
 	},
 	"funding": "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=QZJTX9GRYEV9N&currency_code=USD",
 	"type": "module",
