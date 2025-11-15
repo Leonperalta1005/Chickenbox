@@ -39,6 +39,17 @@ var beepbox = (function (exports) {
         { name: "expert", realName: "chromatic", flags: [true, true, true, true, true, true, true, true, true, true, true, true] },
     ]);
     Config.keys = toNameMap([
+	    { name: "C#", isWhiteKey: true, basePitch: 1 },
+	    { name: "D2", isWhiteKey: true, basePitch: 2 },
+	    { name: "D#2", isWhiteKey: true, basePitch: 3 },
+	    { name: "E2", isWhiteKey: true, basePitch: 4 },
+        { name: "F2", isWhiteKey: true, basePitch: 5 },
+        { name: "F♯2", isWhiteKey: false, basePitch: 6 },
+        { name: "G2", isWhiteKey: true, basePitch: 7 },
+	    { name: "G#2", isWhiteKey: true, basePitch: 8 },
+	    { name: "A2", isWhiteKey: true, basePitch: 9 },
+	    { name: "A#2", isWhiteKey: true, basePitch: 10 },
+	    { name: "B2", isWhiteKey: true, basePitch: 11 },
         { name: "C", isWhiteKey: true, basePitch: 12 },
         { name: "C♯", isWhiteKey: false, basePitch: 13 },
         { name: "D", isWhiteKey: true, basePitch: 14 },
@@ -53,13 +64,13 @@ var beepbox = (function (exports) {
         { name: "B", isWhiteKey: true, basePitch: 23 },
     ]);
     Config.blackKeyNameParents = [-1, 1, -1, 1, -1, 1, -1, -1, 1, -1, 1, -1];
-    Config.tempoMin = 0;
+    Config.tempoMin = 1;
     Config.tempoMax = 97104;
     Config.reverbRange = 4;
     Config.beatsPerBarMin = 1;
     Config.beatsPerBarMax = 100;
     Config.barCountMin = 1;
-    Config.barCountMax = 10000000000000000000000000;
+    Config.barCountMax = 97104;
     Config.instrumentsPerChannelMin = 1;
     Config.instrumentsPerChannelMax = 10;
     Config.partsPerBeat = 24;
