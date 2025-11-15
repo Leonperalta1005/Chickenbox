@@ -33,14 +33,14 @@ export class EditorConfig {
 	
 	public static readonly presetCategories: DictionaryArray<PresetCategory> = toNameMap([
 		{name: "Custom Instruments", presets: <DictionaryArray<Preset>> toNameMap([
-			{name: "chip wave",        customType: InstrumentType.chip},
-			{name: "FM (expert)",      customType: InstrumentType.fm},
-			{name: "spectrum",         customType: InstrumentType.spectrum},
-			{name: "drumset",          customType: InstrumentType.drumset},
-			{name: "harmonics",        customType: InstrumentType.harmonics},
-			{name: "pulse width",      customType: InstrumentType.pwm},
-			{name: "picked string",    customType: InstrumentType.pickedString},
-			{name: "supersaw",         customType: InstrumentType.supersaw},
+			{name: "so retro",        customType: InstrumentType.chip},
+			{name: "eff em",      customType: InstrumentType.fm},
+			{name: "im a not spectrum",         customType: InstrumentType.spectrum},
+			{name: "fake drums",          customType: InstrumentType.drumset},
+			{name: "???",        customType: InstrumentType.harmonics},
+			{name: "pulse width sounds funny",      customType: InstrumentType.pwm},
+			{name: "???",    customType: InstrumentType.pickedString},
+			{name: "supersaw (i cant oppsite as isnt the list)",         customType: InstrumentType.supersaw},
 		])},
 		{name: "Retro Presets", presets: <DictionaryArray<Preset>> toNameMap([
 			{name: "square wave",      midiProgram:  80, settings: {"type":"chip","eqFilter":[],"effects":[],"transition":"interrupt","fadeInSeconds":0,"fadeOutTicks":-1,"chord":"arpeggio","wave":"square","unison":"none","envelopes":[]}},
